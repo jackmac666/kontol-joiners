@@ -5,23 +5,39 @@
   <title>Joining Roblox...</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #1c1c1c;
-      color: white;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      text-align: center;
     }
-    a {
-      color: #00ffcc;
+
+    #redirect h2 {
+      margin-bottom: 20px;
     }
+
     .credit {
-      position: absolute;
-      bottom: 10px;
-      font-size: 14px;
-      color: #555;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff0000;
+      background-color: #000;
+      padding: 12px 24px;
+      border-radius: 10px;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px #fff, -2px -2px #fff; }
+      25% { text-shadow: -2px 2px #000, 2px -2px #000; }
+      50% { text-shadow: 2px -2px #fff, -2px 2px #fff; }
+      75% { text-shadow: -2px -2px #000, 2px 2px #000; }
+      100% { text-shadow: 2px 2px #fff, -2px -2px #fff; }
     }
   </style>
 </head>
@@ -32,7 +48,17 @@
   <div class="credit">MADE BY KONTOL JOINERS</div>
 
   <script>
-    eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String))while(c--)d[c.toString(a)]=k[c]||c.toString(a);k=[function(e){return e}];e=function(){return'\w+'};c=1;while(c--)if(k[c])p=p.replace(new RegExp('\b'+e(c)+'\b','g'),k[c]);return p}('2.0=3(){4 5=6 7(2.8.9);4 a=5.b("c");4 d=5.b("e");f(a&&d){4 g=`h://c=${a}&e=${d}`;4 i=2.j("k");i.l=g;i.m="n o p q";2.r("s").t=`<u>v w x...</u>`;2.r("s").y(i);z(()=>{i.A()},B)}C{2.r("s").t="<u>D c E e F G"}};',38,38,'window|location|document|getElementById|const|url|new|URL|href|href|placeId|get|placeId|gameInstanceId|gameInstanceId|if|robloxLink|roblox|roblox|createElement|a|href|innerText|Click|here|if|not|redirected|getElementById|redirect|innerHTML|p|Redirecting|to|server|appendChild|setTimeout|click|300|else|Missing'.split('|'),0,{}));
+    const params = new URLSearchParams(window.location.search);
+    const placeId = params.get("placeId");
+    const gameInstanceId = params.get("gameInstanceId");
+
+    if (placeId && gameInstanceId) {
+      const robloxUrl = `roblox://placeId=${placeId}&gameInstanceId=${gameInstanceId}`;
+      window.location.replace(robloxUrl);
+    } else {
+      document.getElementById("redirect").innerHTML =
+        "<h2>Missing placeId or gameInstanceId in URL</h2>";
+    }
   </script>
 </body>
 </html>
